@@ -1,0 +1,95 @@
+/*
+
+
+Based on the Kuler theme "sandy stone beach ocean diver" and the colours:
+ - #E6E2AF
+ - #A7A37E
+ - #EFECCA
+ - #046380
+ - #002F2F
+
+See http://kuler.adobe.com/#themeID/15325
+*/
+html, body {
+	height: 100%;
+	background: #EFECCA;
+	font: 13px/1.8em Arial, Helvetica, sans-serif;
+}
+#sidebar {
+	float: left;
+	width: 20%;
+	margin: 0 1.5% 0 0;
+	padding: 0 1% 0 2.5%;
+	color: #222;
+}
+#sidebar h1 {
+	font-size: 2em;
+	font-family: Georgia, serif;
+	margin: 20px 0 5px;
+}
+#sidebar li.widget {
+	margin-bottom: 20px;
+	padding: 20px 0 10px;
+}
+#sidebar h2 {
+	font-size: 1.2em;
+}
+#content {
+	margin-left: 25%;
+	width: 45%;
+	min-height: 100%;
+	background: #fff;
+	border-left: 1px solid #E6E2AF;
+	border-right: 1px solid #E6E2AF;
+}
+#content .wrapper {
+	padding: 0 10% 10%;
+}
+.post {
+	margin-bottom: 3em;
+}
+.post h2 {
+	font-size: 1.5em;
+	font-family: Georgia, serif;
+	margin: 0;
+	padding: 20px 0 10px;
+}
+.post h2 a {
+	text-decoration: none;
+	color: #000;
+}
+.post p.date {
+	color: #A7A37E;
+	float: right;
+	margin: -2.7em 0 0;
+}
+p, .post blockquote,
+.post ol, .post ul, .post dl {
+	margin-bottom: 18px;
+}
+.post code {
+	font-family: Consolas, monospace;
+}
+.post ul, .post ol {
+	margin-left: 1.4em;
+}
+.post ul       { list-style-type: circle; }
+.post ul ul    { list-style-type: square; }
+.post ul ul ul { list-style-type: disc; }
+.post ol       { list-style-type: decimal; }
+.post ol ol    { list-style-type: lower-latin; }
+.post ol ol ol { list-style-type: lower-roman; }
+
+.post a {
+	color: #046380;
+	text-decoration: none;
+}
+.post a:hover {
+	text-decoration: underline;
+}
+#footer {
+	padding: 5% 10% 12em;
+	text-align: center;
+	color: #666;
+	background: url("wp-watermark.png") no-repeat center;
+}
