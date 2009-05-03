@@ -26,15 +26,14 @@ html, body {
 	font-family: Georgia, serif;
 	font-size: 24px; 
 	line-height: 36px;
-	margin: 18px 0; 
+	margin: 24px 0 12px; 
 }
 #sidebar li.widget {
 	margin-bottom: 18px;
-	padding: 8px 0 10px;
 }
 #sidebar h2 {
 	font: 18px/18px Georgia, serif;
-	margin-bottom: 18px;
+	padding: 10px 0 8px;
 }
 #content {
 	margin-left: 25%;
@@ -45,14 +44,14 @@ html, body {
 	border-right: 1px solid #E6E2AF;
 }
 #content .wrapper {
-	padding: 0 10% 10%;
+	padding: 0 10% 36px;
 }
 .post {
-	margin-bottom: 3em;
+	margin-bottom: 36px;
 }
 .post h2 {
 	font: 18px/18px Georgia, serif;
-	padding: 10px 0 8px;
+	padding: 36px 0 18px;
 }
 .post h2 a {
 	text-decoration: none;
@@ -61,7 +60,7 @@ html, body {
 .post p.date {
 	color: #A7A37E;
 	float: right;
-	margin: -2.7em 0 0;
+	margin: -36px 0 0;
 }
 p, .post blockquote,
 .post ol, .post ul, .post dl {
@@ -90,7 +89,7 @@ p, .post blockquote,
 	text-decoration: underline;
 }
 #footer {
-	padding: 5% 10% 12em;
+	padding: 36px 10% 162px;
 	text-align: center;
 	color: #666;
 	background: url("wp-watermark.png") no-repeat center;
