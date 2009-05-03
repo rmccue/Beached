@@ -12,7 +12,7 @@ See http://kuler.adobe.com/#themeID/15325
 */
 html, body {
 	height: 100%;
-	background: #EFECCA;
+	background: #EFECCA url("http://www.alistapart.com/d/settingtypeontheweb/images/gridbg.gif");
 	font: 13px/18px Arial, Helvetica, sans-serif;
 }
 #sidebar {
@@ -40,7 +40,7 @@ html, body {
 	margin-left: 25%;
 	width: 45%;
 	min-height: 100%;
-	background: #fff;
+	/*background: #fff;*/
 	border-left: 1px solid #E6E2AF;
 	border-right: 1px solid #E6E2AF;
 }
