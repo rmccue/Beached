@@ -2,7 +2,7 @@
 get_header();
 ?>
 <?php
-while(has_post()): the_post();
+while(have_posts()): the_post();
 ?>
 				<div class="post" id="post-<?php the_id() ?>">
 					<h2><a href="<?php the_permalink() ?>"><?php the_title() ?></a></h2>
