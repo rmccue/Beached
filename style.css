@@ -35,6 +35,9 @@ html, body {
 	font: 18px/18px Georgia, serif;
 	padding: 10px 0 8px;
 }
+#sidebar li.widget ul {
+	margin-left: 5px;
+}
 #sidebar a {
 	color: #046380;
 	text-decoration: none;
