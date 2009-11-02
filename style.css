@@ -35,6 +35,13 @@ html, body {
 	font: 18px/18px Georgia, serif;
 	padding: 10px 0 8px;
 }
+#sidebar a {
+	color: #046380;
+	text-decoration: none;
+}
+#sidebar a:hover {
+	text-decoration: underline;
+}
 #content {
 	margin-left: 25%;
 	width: 45%;
