@@ -97,6 +97,9 @@ p, .post blockquote,
 .post pre {
 	margin-bottom: 18px;
 }
+.syntaxhighlighter.php {
+	margin: 24px 0 !important;
+}
 .post code, .post pre {
 	font-family: Consolas, monospace;
 	font-size: 12px;
