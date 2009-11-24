@@ -1,0 +1,6 @@
+.shot {
+	background-position: top center;
+}
+	.shot-text {
+		background-image: url("shots/text.png");
+	}
