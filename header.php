@@ -18,3 +18,7 @@
 		<div id="content">
 
 			<div class="wrapper">
+				<div class="post" id="twitter">
+					<span>I haven&apos;t been thinking much lately.</span>
+					<p class="date"><a href="http://twitter.com/rmccue">Meow?</a></p>
+				</div>

@@ -2,7 +2,7 @@
 
 register_sidebar(array(
 	'before_widget' => '
-				<li class="widget" id="%1$s">',
+				<li class="widget" id="widget-%1$s">',
 	'after_widget' => '
 				</li>',
 	'before_title' => '
