@@ -4,6 +4,17 @@
 	padding-right: 30px;
 	margin-right: 7px;
 }
-	.shot-text .date {
-		background-image: url("shots/text.png");
-	}
+
+/*
+Icons from http://burlesck.livejournal.com/1567.html
+
+License "free for commercial use" (assumed same as public domain) from
+  http://www.iconfinder.net/icondetails/37551/16/
+*/
+	.shot-text .date {  background-image: url("shots/text.png");  }
+	.shot-photo .date { background-image: url("shots/photo.png"); }
+	.shot-quote .date { background-image: url("shots/quote.png"); }
+	.shot-link .date {  background-image: url("shots/link.png");  }
+	.shot-chat .date {  background-image: url("shots/chat.png");  }
+	.shot-audio .date { background-image: url("shots/audio.png"); }
+	.shot-video .date { background-image: url("shots/video.png"); }
