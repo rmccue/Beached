@@ -96,7 +96,7 @@ p, .post blockquote,
 .post ol, .post ul, .post dl {
 	margin-bottom: 18px;
 }
-.post code {
+.post code, .post pre {
 	font-family: Consolas, monospace;
 	/* When does 18px not equal 18px? When it's a monospaced font! Setting to 1em seems to fix */
 	line-height: 1em;
