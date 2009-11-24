@@ -93,11 +93,13 @@ html, body {
 	margin: -36px 0 0;
 }
 p, .post blockquote,
-.post ol, .post ul, .post dl {
+.post ol, .post ul, .post dl,
+.post pre {
 	margin-bottom: 18px;
 }
 .post code, .post pre {
 	font-family: Consolas, monospace;
+	font-size: 12px;
 	/* When does 18px not equal 18px? When it's a monospaced font! Setting to 1em seems to fix */
 	line-height: 1em;
 }
