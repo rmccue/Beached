@@ -10,7 +10,7 @@
 	<body>
 		<div id="sidebar">
 
-			<h1><?php bloginfo('name') ?></h1>
+			<h1><a href="<?php bloginfo('home') ?>"><?php bloginfo('name') ?></a></h1>
 			<p><?php bloginfo('description') ?></p>
 			<ul>
 				<?php dynamic_sidebar() ?>

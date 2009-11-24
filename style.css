@@ -28,6 +28,9 @@ html, body {
 	line-height: 36px;
 	margin: 24px 0 12px; 
 }
+	#sidebar h1 a {
+		color: inherit;
+	}
 #sidebar li.widget {
 	margin-bottom: 18px;
 }
@@ -105,6 +108,8 @@ p, .post blockquote,
 	font-size: 12px;
 	/* When does 18px not equal 18px? When it's a monospaced font! Setting to 1em seems to fix */
 	line-height: 1em;
+	background: #ffa;
+	padding: 2px;
 }
 .post ul, .post ol {
 	margin-left: 1.4em;
