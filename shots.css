@@ -1,6 +1,9 @@
-.shot {
-	background-position: top center;
+.shot .date {
+	background-position: top right;
+	background-repeat: no-repeat;
+	padding-right: 30px;
+	margin-right: 7px;
 }
-	.shot-text {
+	.shot-text .date {
 		background-image: url("shots/text.png");
 	}
