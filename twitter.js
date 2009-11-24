@@ -91,7 +91,6 @@ function relative_time(time_value) {
 	}
 	
 	delta = delta + (relative_to.getTimezoneOffset() * 60);
-	console.log(delta);
 
 	if (delta < 5) {
 		r = 'less than 5 seconds ago';
