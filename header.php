@@ -6,6 +6,7 @@
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() ?>/style.css" type="text/css" />
 		<link rel="stylesheet" href="<?php echo get_stylesheet_directory_uri() ?>/shots.css" type="text/css" />
 		<?php wp_head() ?>
+		<script src="http://ryanmccue.info/mint/?js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div id="sidebar">
