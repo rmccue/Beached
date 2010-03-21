@@ -49,6 +49,79 @@ function shot_init() {
 }
 add_action('init', 'shot_init');
 
+function shot_admin() {
+	add_meta_box( 'shot-meta-box', 'Shot', 'shot_meta_box', 'post', 'side', 'high' );
+}
+add_action('admin_menu', 'shot_admin'); 
+
+function shot_meta_box( $object, $box ) {
+	global $shot_types;
+?>
+<p>
+    <label for="shot-post-type">
+        <strong>Post Type</strong>
+    </label>
+	<select name="shot-post-type" id="shot-post-type">
+<?php
+	foreach($shot_types as $type => $detail) {
+		$selected = ($type == get_post_meta($object->ID, 'shot_post_type', true)) ? ' selected="selected"' : '';
+?>
+		<option value="<?php echo $type ?>"<?php echo $selected ?>><?php echo $detail['name'] ?></option>
+<?php
+	}
+?>
+	</select>
+<?php
+	$target = get_post_meta($object->ID, 'shot_link_target', true);
+?>
+	<label for="shot-link-target">
+		<strong>Link Target</strong>
+	</label>
+	<input type="text" name="shot-link-target" id="shot-link-target" value="<?php echo $target ?>" />
+    <input type="hidden" name="shot-nonce" value="<?php echo wp_create_nonce( 'shot-meta-box' ); ?>" />
+</p>
+<?php
+}
+
+function shot_post_callback( $post_id ) {
+	global $post, $shot_types;
+
+	// Verify
+	if ( !wp_verify_nonce( $_POST['shot-nonce'], 'shot-meta-box' ))
+		return $post_id;
+
+	// Pages can't have shot data
+	if ( 'page' == $_POST['post_type'] )
+		return $post_id;
+
+	// Check permissions
+	if ( !current_user_can( 'edit_post', $post_id ))
+		return $post_id;
+
+	// SHOT TYPE
+	$types = array_keys($shot_types);
+	$data = $_POST['shot-post-type'];
+	if(!in_array($data, $types))
+		$data = $types[0];
+
+	if(get_post_meta($post_id, 'shot_post_type') == "")
+		add_post_meta($post_id, 'shot_post_type', $data, true);
+
+	elseif($data != get_post_meta($post_id, 'shot_post_type', true))
+		update_post_meta($post_id, 'shot_post_type', $data);
+
+	// SHOT LINK TARGET
+	$data = $_POST['shot-link-target'];
+	$data = htmlspecialchars($data);
+
+	if(get_post_meta($post_id, 'shot_link_target') == "")
+		add_post_meta($post_id, 'shot_link_target', $data, true);
+
+	elseif($data != get_post_meta($post_id, 'shot_link_target', true))
+		update_post_meta($post_id, 'shot_link_target', $data);
+}
+add_action('save_post', 'shot_post_callback');  
+
 /**
  * Retrieves the Shot post type for the current post
  *
