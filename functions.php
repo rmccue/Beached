@@ -99,4 +99,39 @@ function shot_rewrite_rules( $wp_rewrite ) {
 	
 	return ( $rewrite + $keywords_rewrite );
 }
-add_action('generate_rewrite_rules', 'shot_rewrite_rules');
+//add_action('generate_rewrite_rules', 'shot_rewrite_rules');
+
+function shot_link_target($default = '') {
+	global $post;
+	$link = get_post_meta($post->ID, 'shot_link_target', true);
+	if(empty($link))
+		$link = $default;
+	return $link;
+}
+
+function shot_link_tag() {
+	$link = shot_link_target();
+	if(empty($link))
+		return get_the_title();
+
+	return '<a href="' . $link . '">' . get_the_title() . '</a>';
+}
+
+function shot_link_rss_content($content) {
+	if(shot_get_post_type() == 'link' && shot_link_target(false)) {
+		$content .= '<p><a href="' . get_permalink() . '">[Permalink]</a></p>';
+		return $content;
+	}
+	return $content;
+}
+add_filter('the_content_feed', 'shot_link_rss_content');
+add_filter('the_excerpt_rss', 'shot_link_rss_content');
+
+function shot_link_rss_permalink($permalink) {
+	global $wp_query;
+	if(shot_get_post_type() == 'link' && $url = shot_link_target(false)) {
+		return $url;
+	}
+	return $permalink;
+}
+add_filter('the_permalink_rss', 'shot_link_rss_permalink');
