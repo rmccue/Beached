@@ -10,6 +10,12 @@ Based on the Kuler theme "sandy stone beach ocean diver" and the colours:
 
 See http://kuler.adobe.com/#themeID/15325
 */
+@font-face {
+	font-family: 'DroidSerifRegular';
+	src: url('fonts/DroidSerif-Regular.eot');
+	src: local('Droid Serif'), local('DroidSerif'), url('fonts/DroidSerif-Regular.woff') format('woff'), url('fonts/DroidSerif-Regular.ttf') format('truetype'), url('fonts/DroidSerif-Regular.svg#DroidSerif') format('svg');
+}
+
 html, body {
 	height: 100%;
 	background: #EFECCA;
@@ -83,13 +89,24 @@ html, body {
 	margin-bottom: 36px;
 }
 .post h2 {
-	font: 18px/18px Georgia, serif;
+	font: 13px/16px DroidSerifRegular, Georgia, serif;
 	padding: 18px 0 18px;
+	color: #333;
 }
+	.post.shot-text h2 {
+		font: 18px/18px DroidSerifRegular, Georgia, serif;
+	}
+
 .post h2 a {
 	text-decoration: none;
-	color: #000;
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 1px;
 }
+	.post h2 a:hover {
+		text-decoration: none;
+		border-bottom-color: #ccc;
+	}
+
 .post p.date {
 	color: #A7A37E;
 	float: right;
@@ -100,6 +117,18 @@ p, .post blockquote,
 .post pre {
 	margin-bottom: 18px;
 }
+	.post.shot-link ol, .post.shot-link ul, .post.shot-link dl,
+	.post.shot-link pre, .post.shot-link p {
+		margin-left: 10px;
+	}
+	.post blockquote {
+		margin-left: 10px;
+		border-left: 1px solid #E6E2AF;
+		padding-left: 10px;
+	}
+		.post.shot-link blockquote {
+			margin-left: 20px;
+		}
 .syntaxhighlighter.php {
 	margin: 24px 0 !important;
 }
