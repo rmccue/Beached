@@ -157,6 +157,22 @@ p, .post blockquote,
 .post a:hover {
 	text-decoration: underline;
 }
+.post sup {
+	font-size: smaller;
+	line-height: normal;
+	vertical-align: super;
+}
+.post sup a.footnote-link {
+	color: #A7A37E;
+}
+.post .comments {
+	text-align: right;
+	font-size: 10px;
+	color: #aaa;
+}
+.post .comments a {
+	color: #A7A37E;
+}
 #footer {
 	padding: 36px 10% 162px;
 	text-align: center;
