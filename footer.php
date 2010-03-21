@@ -14,6 +14,8 @@
 				$.getJSON("http://search.twitter.com/search.json?q=from%3Armccue&callback=?",
 					function (data) {
 						var status = data["results"][0];
+						if(status == undefined)
+							return false;
 						$('#twitter span').html(ify.clean(status.text));
 						$('#twitter .date a').text(relative_time(status.created_at)).attr('href', 'http://twitter.com/rmccue/status/' + status.id);
 					}
