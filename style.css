@@ -173,6 +173,24 @@ p, .post blockquote,
 .post .comments a {
 	color: #A7A37E;
 }
+
+.navigation {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+	.navigation a {
+		color: #A7A37E;
+	}
+	.nav-previous {
+		float: left;
+		width: 50%;
+	}
+	.nav-next {
+		float: right;
+		width: 50%;
+		text-align:right;
+	}
+
 #footer {
 	padding: 36px 10% 162px;
 	text-align: center;

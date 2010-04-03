@@ -1,7 +1,15 @@
 <?php
 get_header();
+
+if (  $wp_query->max_num_pages > 1 ) :
 ?>
+				<div id="nav-above" class="navigation">
+					<div class="nav-previous"><?php next_posts_link('&larr; Older posts'); ?></div>
+					<div class="nav-next"><?php previous_posts_link('Newer posts &rarr;'); ?></div>
+				</div><!-- #nav-aobe -->
 <?php
+endif;
+
 while(have_posts()): the_post();
 	$post_type = shot_get_post_type();
 	if($post_type == 'link'):
@@ -28,5 +36,14 @@ while(have_posts()): the_post();
 <?php
 	endif;
 endwhile;
+?>
+
+<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+				<div id="nav-below" class="navigation">
+					<div class="nav-previous"><?php next_posts_link('&larr; Older posts'); ?></div>
+					<div class="nav-next"><?php previous_posts_link('Newer posts &rarr;'); ?></div>
+				</div><!-- #nav-below -->
+<?php
+endif;
 get_footer();
 ?>
