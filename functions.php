@@ -16,7 +16,7 @@ register_post_type('link', array(
 	'label' => __('Links'),
 	'singular_label' => __('Link'),
 	'public' => true,
-	'show_ui' => true,
+	'show_ui' => false,
 	'_builtin' => false,
 	'_edit_link' => 'post.php?post=%d',
 	'capability_type' => 'post',
@@ -83,6 +83,17 @@ add_action('save_post', 'shot_post_callback');
 
 function shot_admin() {
 	add_meta_box( 'shot-meta-box', 'Shot', 'shot_meta_box', 'link', 'normal', 'high' );
+	global $menu, $submenu;
+
+	// Remove the *other* "Links" menu
+	unset($menu[15]);
+
+	$ptype_obj = get_post_type_object('link');
+
+	add_menu_page( '', esc_attr($ptype_obj->label), $ptype_obj->edit_type_cap, "edit.php?post_type=link", '', get_stylesheet_directory_uri() . '/shots/link.png', 6);
+
+	add_submenu_page( "edit.php?post_type=link", 'Edit Links', 'Edit', $ptype_obj->edit_type_cap, "edit.php?post_type=link");
+	add_submenu_page( "edit.php?post_type=link", 'Add New Link', 'Add New', $ptype_obj->edit_type_cap, "post-new.php?post_type=link");
 }
 add_action('admin_menu', 'shot_admin');
 
