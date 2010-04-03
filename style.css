@@ -47,13 +47,6 @@ html, body {
 #sidebar li.widget ul {
 	margin-left: 5px;
 }
-#sidebar a {
-	color: #046380;
-	text-decoration: none;
-}
-#sidebar a:hover {
-	text-decoration: underline;
-}
 #content {
 	margin-left: 25%;
 	width: 45%;
@@ -150,12 +143,19 @@ p, .post blockquote,
 .post ol ol    { list-style-type: lower-latin; }
 .post ol ol ol { list-style-type: lower-roman; }
 
-.post a {
+a {
 	color: #046380;
 	text-decoration: none;
 }
-.post a:hover {
-	text-decoration: underline;
+	a:hover {
+		text-decoration: underline;
+	}
+
+.post em {
+	font-style: italic;
+}
+.post strong {
+	font-weight: bold;
 }
 .post sup {
 	font-size: smaller;
