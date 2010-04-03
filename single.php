@@ -3,10 +3,10 @@ get_header();
 ?>
 <?php
 while(have_posts()): the_post();
-	$post_type = shot_get_post_type();
+	$post_type = get_post_type($post);
 	if($post_type == 'link'):
 ?>
-				<div class="post shot shot-<?php echo shot_get_post_type() ?>" id="post-<?php the_id() ?>">
+				<div class="post shot shot-<?php echo $post_type ?>" id="post-<?php the_id() ?>">
 					<h2><?php echo shot_link_tag() ?></h2>
 					<p class="date"><?php the_time('jS \o\f F') ?></p>
 					<div class="content">
@@ -17,7 +17,7 @@ while(have_posts()): the_post();
 <?php
 	else:
 ?>
-				<div class="post shot shot-<?php echo shot_get_post_type() ?>" id="post-<?php the_id() ?>">
+				<div class="post shot shot-<?php echo $post_type ?>" id="post-<?php the_id() ?>">
 					<h2><?php the_title() ?></h2>
 					<p class="date"><?php the_time('jS \o\f F') ?></p>
 					<div class="content">

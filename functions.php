@@ -11,77 +11,48 @@ register_sidebar(array(
 					',
 ));
 
+// Fire this during init
+register_post_type('link', array(
+	'label' => __('Links'),
+	'singular_label' => __('Link'),
+	'public' => true,
+	'show_ui' => true,
+	'_builtin' => false,
+	'_edit_link' => 'post.php?post=%d',
+	'capability_type' => 'post',
+	'hierarchical' => false,
+	'supports' => array('title', 'editor', 'author', 'comments', 'custom-fields'),
+	'rewrite' => array('slug' => 'link')
+));
 
-/* Shot code */
 
-function shot_init() {
-	global $shot_types;
-	$shot_types = array(
-		'text' => array(
-			'name' => 'Text',
-			'callback' => 'shot_text_callback',
-		),
-		'photo' => array(
-			'name' => 'Photo',
-			'callback' => 'shot_photo_callback',
-		),
-		'quote' => array(
-			'name' => 'Quote',
-			'callback' => 'shot_quote_callback',
-		),
-		'link' => array(
-			'name' => 'Link',
-			'callback' => 'shot_link_callback',
-		),
-		'chat' => array(
-			'name' => 'Chat',
-			'callback' => 'shot_chat_callback',
-		),
-		'audio' => array(
-			'name' => 'Audio',
-			'callback' => 'shot_audio_callback',
-		),
-		'video' => array(
-			'name' => 'Video',
-			'callback' => 'shot_video_callback',
-		),
-	);
+function shot_get_posts( $query ) {
+	if ( is_home() || is_feed() )
+		$query->set( 'post_type', array( 'post', 'link', 'attachment' ) );
+
+	return $query;
 }
-add_action('init', 'shot_init');
+add_filter( 'pre_get_posts', 'shot_get_posts' );
 
-function shot_admin() {
-	add_meta_box( 'shot-meta-box', 'Shot', 'shot_meta_box', 'post', 'side', 'high' );
+function shot_link_columns($columns) {
+	$columns = array(
+		'cb' => '<input type="checkbox" />',
+		'title' => 'Link Title',
+		'description' => 'Description',
+		'url' => 'URL',
+		'comments' => 'Comments',
+	);	
+	return $columns;
 }
-add_action('admin_menu', 'shot_admin'); 
-
-function shot_meta_box( $object, $box ) {
-	global $shot_types;
-?>
-<p>
-    <label for="shot-post-type">
-        <strong>Post Type</strong>
-    </label>
-	<select name="shot-post-type" id="shot-post-type">
-<?php
-	foreach($shot_types as $type => $detail) {
-		$selected = ($type == get_post_meta($object->ID, 'shot_post_type', true)) ? ' selected="selected"' : '';
-?>
-		<option value="<?php echo $type ?>"<?php echo $selected ?>><?php echo $detail['name'] ?></option>
-<?php
-	}
-?>
-	</select>
-<?php
-	$target = get_post_meta($object->ID, 'shot_link_target', true);
-?>
-	<label for="shot-link-target">
-		<strong>Link Target</strong>
-	</label>
-	<input type="text" name="shot-link-target" id="shot-link-target" value="<?php echo $target ?>" />
-    <input type="hidden" name="shot-nonce" value="<?php echo wp_create_nonce( 'shot-meta-box' ); ?>" />
-</p>
-<?php
+add_filter('manage_edit-podcast_columns', 'shot_link_columns');
+ 
+function shot_link_custom_columns($column) {
+	global $post;
+	if ("ID" == $column) echo $post->ID;
+	elseif ("description" == $column) echo $post->post_content;
+	elseif ("url" == $column) echo "63:50";
 }
+add_action('manage_posts_custom_column', 'shot_link_custom_columns');
 
 function shot_post_callback( $post_id ) {
 	global $post, $shot_types;
@@ -91,24 +62,12 @@ function shot_post_callback( $post_id ) {
 		return $post_id;
 
 	// Pages can't have shot data
-	if ( 'page' == $_POST['post_type'] )
+	if ( 'link' !== $_POST['post_type'] )
 		return $post_id;
 
 	// Check permissions
 	if ( !current_user_can( 'edit_post', $post_id ))
 		return $post_id;
-
-	// SHOT TYPE
-	$types = array_keys($shot_types);
-	$data = $_POST['shot-post-type'];
-	if(!in_array($data, $types))
-		$data = $types[0];
-
-	if(get_post_meta($post_id, 'shot_post_type') == "")
-		add_post_meta($post_id, 'shot_post_type', $data, true);
-
-	elseif($data != get_post_meta($post_id, 'shot_post_type', true))
-		update_post_meta($post_id, 'shot_post_type', $data);
 
 	// SHOT LINK TARGET
 	$data = $_POST['shot-link-target'];
@@ -120,59 +79,24 @@ function shot_post_callback( $post_id ) {
 	elseif($data != get_post_meta($post_id, 'shot_link_target', true))
 		update_post_meta($post_id, 'shot_link_target', $data);
 }
-add_action('save_post', 'shot_post_callback');  
+add_action('save_post', 'shot_post_callback');
 
-/**
- * Retrieves the Shot post type for the current post
- *
- * @param string $default Default type if post does not have one
- * @return string Post type
- */
-function shot_get_post_type($default = 'text') {
-	global $post;
-	$type = get_post_meta($post->ID, 'shot_post_type', true);
-	if(empty($type))
-		$type = $default;
-	return $type;
+function shot_admin() {
+	add_meta_box( 'shot-meta-box', 'Shot', 'shot_meta_box', 'link', 'normal', 'high' );
 }
+add_action('admin_menu', 'shot_admin');
 
-/**
- * Register a Shot post type
- *
- * @param string $id Unique identifier for the post type
- * @param string $name Display name
- * @param callback $callback Function/Method to call for the create/edit page
- */
-function shot_register_post_type($id, $name, $callback) {
+function shot_meta_box( $object, $box ) {
 	global $shot_types;
-	$shot_types[$id] = array(
-		'name' => $name,
-		'callback' => $callback
-	);
+	$target = get_post_meta($object->ID, 'shot_link_target', true);
+?>
+	<p><label for="shot-link-target">Link to:</label>
+	<input type="text" name="shot-link-target" id="shot-link-target" value="<?php echo $target ?>" class="code" style="width: 99%" /></p>
+	<p>This makes the title of the post link to this address on your blog. It will also change your permalink in your Atom and RSS feeds.</p>
+    <input type="hidden" name="shot-nonce" value="<?php echo wp_create_nonce( 'shot-meta-box' ); ?>" />
+</p>
+<?php
 }
-
-/**
- * Retrieve all registered Shot post types
- *
- * @return array
- */
-function shot_list_types() {
-	global $shot_types;
-	return $shot_types;
-}
-
-
-function shot_rewrite_rules( $wp_rewrite ) {
-	// add rewrite tokens
-	$keytag_token = '%add%';
-	$wp_rewrite->add_rewrite_tag($keytag_token, '(.+)', 'shot_add=');
-	
-	$keywords_structure = $wp_rewrite->root . "add/$keytag_token";
-	$keywords_rewrite = $wp_rewrite->generate_rewrite_rules($keywords_structure);
-	
-	return ( $rewrite + $keywords_rewrite );
-}
-//add_action('generate_rewrite_rules', 'shot_rewrite_rules');
 
 function shot_link_target($default = '') {
 	global $post;
