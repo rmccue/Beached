@@ -115,7 +115,8 @@ function shot_link_tag() {
 }
 
 function shot_link_rss_content($content) {
-	if(shot_get_post_type() == 'link' && shot_link_target(false)) {
+	global $post;
+	if(get_post_type($post) == 'link' && shot_link_target(false)) {
 		$content .= '<p><a href="' . get_permalink() . '">[Permalink]</a></p>';
 		return $content;
 	}
@@ -125,8 +126,8 @@ add_filter('the_content_feed', 'shot_link_rss_content');
 add_filter('the_excerpt_rss', 'shot_link_rss_content');
 
 function shot_link_rss_permalink($permalink) {
-	global $wp_query;
-	if(shot_get_post_type() == 'link' && $url = shot_link_target(false)) {
+	global $wp_query, $post;
+	if(get_post_type($post) == 'link' && $url = shot_link_target(false)) {
 		return $url;
 	}
 	return $permalink;
